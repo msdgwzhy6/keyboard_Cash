@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setUpPayKeyAdapter();
     }
 
+
+
+
     private void setUpPayKeyAdapter() {
         final PayKeyAdapter adapter = new PayKeyAdapter(this);
         gridview.setAdapter(adapter);
@@ -46,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 String keyType = view.findViewById(R.id.GridTextView).getTag().toString();
                 String textValue = ((TextView)view.findViewById(R.id.GridTextView)).getText().toString();
                 String editText = editMemberAmount.getText().toString();
-
-
                 if(keyType.equals("num")){
                     //数字键
                     try{
@@ -138,91 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         editMemberAmount.setText("0.");
                     }
                 }
-                if(keyType.equals("plus")){
-                    //加
-                    try{
-                        if(editText.lastIndexOf("+") == editText.length()-1){
-                            //最后为加则不处理
 
-                        }else{
-                            numIndex++;
-                            numList.add("");
-                            editMemberAmount.setText(editText+textValue);
-                        }
-                    }catch(Exception e){
-                        numIndex=0;
-                        numList=new ArrayList<String>();
-                        numList.add("0");
-                        editMemberAmount.setText("");
-                    }
-                }
-                if(keyType.equals("cancel")){
-                    //清空
-                    //确认是否清空
-                    AlertDialog.Builder clearBuilder = new AlertDialog.Builder(MainActivity.this);// 添加按钮的单击事件
-                    clearBuilder.setMessage("是否确认要清空当前收款数据?")
-                            . // 设置确定按钮
-                            setPositiveButton("确定",
-                            new DialogInterface.OnClickListener() {
-                                // 单击事件
-                                public void onClick(
-                                        DialogInterface dialog,
-                                        int which) { // 设置TextView文本
-                                    clearInputData();
-                                }
-                            })
-                            . // 设置取消按钮
-                            setNegativeButton("取消",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
-
-                                }
-                            }); // 创建对话框
-                    AlertDialog ad = clearBuilder.create(); // 显示对话框
-                    ad.show();
-                }
-                if(keyType.equals("equal")||keyType.equals("pay")){
-                    //等于
-                    try{
-                        double sum = 0.0;
-                        for(String value :numList){
-                            if(!value.equals("")){
-                                sum+= Double.parseDouble(value)+0.00d;
-                            }
-                        }
-
-                        String sumStr=new DecimalFormat("##.##").format(sum);
-                        if(!sumStr.contains(".")){
-                            sumStr+=".00";
-                        }
-                        if(sumStr.substring(sumStr.lastIndexOf(".")+1).length()<2){
-                            sumStr+="0";
-                        }
-
-                        numIndex=0;
-                        numList=new ArrayList<String>();
-                        numList.add(sumStr);
-                        editMemberAmount.setText(sumStr);
-                    }catch(Exception e){
-                        numIndex=0;
-                        numList=new ArrayList<String>();
-                        numList.add("0");
-                        editMemberAmount.setText("");
-                    }
-                }
-                if(keyType.equals("pay")){
-                    //收款
-                    if (editMemberAmount.getText().toString().length() < 1||editMemberAmount.getText().toString().equals("0.00") || editMemberAmount.getText().toString().equals("0")) {
-                        Toast.makeText(getApplicationContext(),"请输入金额",Toast.LENGTH_SHORT).show();
-                        return;
-                    }else {
-                        Toast.makeText(getApplicationContext(),"收款成功",Toast.LENGTH_SHORT).show();
-                    }
-
-
-                }
             }
         });
 

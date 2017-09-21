@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>  
-<LinearLayout 
+<FrameLayout
  xmlns:android="http://schemas.android.com/apk/res/android"
  	android:id="@+id/GridItemLayout" 
     android:orientation="vertical" 
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent"
-    > 
-	<TextView  
-	    android:id="@+id/GridTextView"  
-	    android:layout_width="fill_parent" 
-	    android:layout_height="75dp" 
+    android:layout_width="fill_parent"
+	android:gravity="center"
+	android:background="@drawable/gv_one_selector"
+	android:layout_height="fill_parent"
+    >
+	<!-- 修改下面帧布局高度适配-->
+<FrameLayout
+	android:layout_width="match_parent"
+	android:gravity="center"
+	android:background="@drawable/gv_one_selector"
+	android:layout_height="68dp">
+	<TextView
+		android:text="asdasdasda"
+	    android:id="@+id/GridTextView"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
 	    android:gravity="center_vertical|center_horizontal"
-	    android:background="@drawable/btn_cell"
 	    android:textSize="30sp"
-	    android:textColor="@color/black"
-	    />  
-</LinearLayout>
+		android:layout_gravity="center"
+	    android:textColor="@color/color_selector"
+	    />
+	<ImageView
+		android:id="@+id/iv_back"
+		android:src="@drawable/iv_jianpan"
+	android:layout_gravity="center"
+		android:layout_width="54dp"
+		android:layout_height="31dp" />
+</FrameLayout>
+</FrameLayout >
